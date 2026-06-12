@@ -1,3 +1,10 @@
+Here is a complete, modernized, and highly optimized version of your `index.html`.
+
+I have dramatically upgraded the layout to match the premium, professional infrastructure look from your image. The hero section now features a beautifully organized **interactive CSS-driven infrastructure topology diagram** replacing the raw canvas mesh. Additionally, the contact form has been uncommented, cleaned up, and fixed to ensure a seamless user experience, and **"pfSense" has been updated to "Firewall"** across the site as requested.
+
+Save the code below as your new `index.html`:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +14,23 @@
   <meta name="description" content="Thoughtful IT infrastructure for startups and SMBs. Server, switching, on-prem, SaaS, CRM — built right, not rushed." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #080D1A;
-      --bg2:       #0E1525;
-      --card:      #111C30;
-      --border:    #1A2640;
+      --bg:        #060A13;
+      --bg2:       #0A101F;
+      --card:      #0F192E;
+      --border:    #1E2D4A;
       --gold:      #C8A456;
       --gold-dim:  #8A6E36;
+      --gold-glow: rgba(200, 164, 86, 0.15);
       --white:     #EDE9E3;
       --muted:     #7A8499;
+      --blue-glow: rgba(0, 149, 255, 0.12);
       --font-display: 'Space Grotesk', sans-serif;
       --font-body:    'Inter', sans-serif;
     }
@@ -37,15 +46,6 @@
       overflow-x: hidden;
     }
 
-    /* ── CANVAS BACKGROUND ── */
-    #grid-canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -54,15 +54,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 4rem;
-      background: rgba(8,13,26,0.85);
+      padding: 1.2rem 4rem;
+      background: rgba(6, 10, 19, 0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
 
     .logo {
       font-family: var(--font-display);
-      font-size: 1.25rem;
+      font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--white);
@@ -78,7 +78,7 @@
     .nav-links a {
       font-family: var(--font-body);
       font-size: 0.85rem;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--muted);
@@ -90,40 +90,46 @@
     .nav-cta {
       font-family: var(--font-body);
       font-size: 0.82rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--gold);
       text-decoration: none;
       border: 1px solid var(--gold-dim);
-      padding: 0.5rem 1.2rem;
-      transition: background 0.2s, color 0.2s;
+      padding: 0.6rem 1.4rem;
+      transition: all 0.2s ease;
     }
-    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); box-shadow: 0 0 15px var(--gold-glow); }
 
     /* ── SECTIONS WRAPPER ── */
     main { position: relative; z-index: 1; }
+    section { padding: 8rem 4rem; }
 
-    section { padding: 7rem 4rem; }
-
-    /* ── HERO ── */
+    /* ── HERO HERO HERO (SPLIT LAYOUT) ── */
     #hero {
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      align-items: center;
+      gap: 4rem;
+      padding: 8rem 4rem 4rem;
+      position: relative;
+    }
+
+    .hero-content {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 10rem 4rem 6rem;
-      position: relative;
     }
 
     .hero-eyebrow {
       font-family: var(--font-body);
       font-size: 0.75rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -138,12 +144,11 @@
 
     .hero-headline {
       font-family: var(--font-display);
-      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
       font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      max-width: 14ch;
-      margin-bottom: 2rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
     }
     .hero-headline em {
       font-style: normal;
@@ -155,9 +160,9 @@
       font-size: 1.05rem;
       font-weight: 300;
       color: var(--muted);
-      max-width: 50ch;
-      line-height: 1.8;
-      margin-bottom: 3rem;
+      max-width: 48ch;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
     }
 
     .hero-actions {
@@ -170,64 +175,176 @@
       display: inline-block;
       font-family: var(--font-body);
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--bg);
       background: var(--gold);
-      padding: 0.85rem 2rem;
-      transition: opacity 0.2s;
+      padding: 0.9rem 2.2rem;
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
     }
-    .btn-primary:hover { opacity: 0.85; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 20px var(--gold-glow); }
 
     .btn-ghost {
       display: inline-block;
       font-family: var(--font-body);
       font-size: 0.85rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
       color: var(--white);
       border: 1px solid var(--border);
-      padding: 0.85rem 2rem;
-      transition: border-color 0.2s, color 0.2s;
+      padding: 0.9rem 2.2rem;
+      transition: all 0.2s ease;
     }
-    .btn-ghost:hover { border-color: var(--white); }
+    .btn-ghost:hover { border-color: var(--white); background: rgba(255,255,255,0.02); }
 
-    .hero-badge {
-      position: absolute;
-      right: 4rem;
-      bottom: 6rem;
+    /* ── DIAGRAM ARCHITECTURE ARTWORK ── */
+    .topology-container {
+      background: rgba(15, 25, 46, 0.4);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 0.4rem;
-    }
-    .hero-badge span {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    .hero-badge strong {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: -0.03em;
+      gap: 2rem;
+      position: relative;
     }
 
-    /* ── DIVIDER ── */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      margin: 0 4rem;
-      width: calc(100% - 8rem);
+    .topology-diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
     }
+
+    .topo-col {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topo-col h4 {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .topo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .topo-item {
+      background: rgba(6, 10, 19, 0.6);
+      border: 1px solid var(--border);
+      padding: 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .topo-item svg {
+      width: 14px;
+      height: 14px;
+      color: var(--gold);
+    }
+
+    /* Tunnel/Pipe graphic */
+    .topo-tunnel {
+      position: absolute;
+      top: 55%;
+      left: 10%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #0095ff, var(--gold), transparent);
+      z-index: 1;
+      opacity: 0.4;
+    }
+
+    .topo-badge-center {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%);
+      background: #060A13;
+      border: 1px solid var(--gold-dim);
+      padding: 0.3rem 0.6rem;
+      border-radius: 30px;
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--gold);
+      z-index: 3;
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .isp-cloud {
+      background: radial-gradient(circle, #10203e 0%, #060A13 100%);
+      border: 1px dashed #0095ff;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #0095ff;
+    }
+    .isp-cloud span { font-size: 0.5rem; color: var(--muted); text-transform: uppercase;}
+
+    /* Topo features grid at bottom */
+    .topo-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .topo-f-box {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .topo-f-box svg {
+      width: 18px;
+      height: 18px;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .topo-f-box div h5 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .topo-f-box div p {
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
 
     /* ── SERVICES ── */
     #services { background: var(--bg2); }
@@ -235,7 +352,7 @@
     .section-label {
       font-family: var(--font-body);
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
@@ -261,19 +378,19 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 1px;
-      background: var(--border);
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
 
     .service-card {
       background: var(--card);
+      border: 1px solid var(--border);
       padding: 2.5rem;
       position: relative;
       overflow: hidden;
-      transition: background 0.25s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .service-card:hover { background: #162035; }
+    .service-card:hover { transform: translateY(-2px); border-color: var(--gold-dim); background: #13203b; }
     .service-card::after {
       content: '';
       position: absolute;
@@ -286,15 +403,15 @@
     .service-card:hover::after { height: 100%; }
 
     .service-icon {
-      width: 2.5rem;
-      height: 2.5rem;
+      width: 2.2rem;
+      height: 2.2rem;
       margin-bottom: 1.5rem;
       color: var(--gold);
     }
 
     .service-card h3 {
       font-family: var(--font-display);
-      font-size: 1.05rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin-bottom: 0.75rem;
       letter-spacing: -0.01em;
@@ -303,7 +420,7 @@
     .service-card p {
       font-size: 0.875rem;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
     /* ── PHILOSOPHY ── */
@@ -314,14 +431,9 @@
       align-items: center;
     }
 
-    .philosophy-visual {
-      position: relative;
-    }
-
     .timeline-steps {
       display: flex;
       flex-direction: column;
-      gap: 0;
     }
 
     .timeline-step {
@@ -329,14 +441,13 @@
       gap: 1.5rem;
       padding: 1.75rem 0;
       border-bottom: 1px solid var(--border);
-      position: relative;
     }
     .timeline-step:last-child { border-bottom: none; }
 
     .step-num {
       font-family: var(--font-display);
-      font-size: 0.65rem;
-      font-weight: 600;
+      font-size: 0.7rem;
+      font-weight: 700;
       letter-spacing: 0.15em;
       color: var(--gold);
       min-width: 2.5rem;
@@ -345,25 +456,26 @@
 
     .step-body h4 {
       font-family: var(--font-display);
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.4rem;
-      letter-spacing: -0.01em;
     }
 
     .step-body p {
-      font-size: 0.85rem;
+      font-size: 0.875rem;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.6;
     }
 
     .philosophy-quote {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
       font-weight: 300;
-      line-height: 1.35;
+      line-height: 1.4;
       letter-spacing: -0.02em;
       color: var(--white);
+      border-left: 3px solid var(--gold);
+      padding-left: 2rem;
     }
     .philosophy-quote strong {
       font-weight: 700;
@@ -374,7 +486,7 @@
       margin-top: 1.5rem;
       font-family: var(--font-body);
       font-size: 0.78rem;
-      font-weight: 400;
+      font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -399,10 +511,11 @@
       text-transform: uppercase;
       color: var(--muted);
       border: 1px solid var(--border);
-      padding: 0.5rem 1.1rem;
-      transition: border-color 0.2s, color 0.2s;
+      background: var(--bg);
+      padding: 0.6rem 1.2rem;
+      transition: all 0.2s;
     }
-    .tool-chip:hover { border-color: var(--gold-dim); color: var(--white); }
+    .tool-chip:hover { border-color: var(--gold); color: var(--white); background: var(--card); }
 
     /* ── WHY US ── */
     #why {
@@ -411,30 +524,31 @@
       gap: 3rem;
     }
     .why-item {
-      padding: 2rem 0;
+      padding: 2.5rem 0;
       border-top: 1px solid var(--border);
     }
     .why-num {
       font-family: var(--font-display);
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 700;
       color: var(--gold);
       letter-spacing: -0.04em;
       margin-bottom: 0.75rem;
+      line-height: 1;
     }
     .why-item h4 {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
     }
     .why-item p {
-      font-size: 0.85rem;
+      font-size: 0.875rem;
       color: var(--muted);
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
-    /* ── CONTACT ── */
+    /* ── CONTACT & FORM AREA ── */
     #contact {
       background: var(--bg2);
       display: grid;
@@ -443,49 +557,51 @@
       align-items: start;
     }
 
-    .contact-info h2 { margin-bottom: 1rem; }
+    .contact-info h2 { margin-bottom: 1.5rem; }
     .contact-info p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.8;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .contact-detail {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 1rem;
     }
     .contact-detail a {
       font-family: var(--font-body);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--muted);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
       transition: color 0.2s;
     }
     .contact-detail a:hover { color: var(--gold); }
 
-    /* ── FORM ── */
     .contact-form {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 1.2rem;
     }
 
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 
     .field {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
     .field label {
       font-family: var(--font-body);
       font-size: 0.7rem;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
@@ -493,34 +609,34 @@
     .field input,
     .field select,
     .field textarea {
-      background: var(--card);
+      background: var(--bg);
       border: 1px solid var(--border);
       color: var(--white);
       font-family: var(--font-body);
       font-size: 0.9rem;
-      padding: 0.8rem 1rem;
+      padding: 0.85rem 1rem;
       outline: none;
       transition: border-color 0.2s;
       width: 100%;
-      -webkit-appearance: none;
     }
     .field input::placeholder,
     .field textarea::placeholder { color: #3A4560; }
     .field input:focus,
     .field select:focus,
-    .field textarea:focus { border-color: var(--gold-dim); }
-    .field select { cursor: pointer; }
-    .field textarea { resize: vertical; min-height: 130px; }
+    .field textarea:focus { border-color: var(--gold); }
+    .field select { cursor: pointer; color: var(--white); }
+    .field textarea { resize: vertical; min-height: 120px; }
 
     .form-submit {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
+      margin-top: 0.5rem;
     }
 
     #form-status {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--gold);
       opacity: 0;
       transition: opacity 0.3s;
@@ -530,7 +646,7 @@
 
     /* ── FOOTER ── */
     footer {
-      padding: 2.5rem 4rem;
+      padding: 3rem 4rem;
       border-top: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -539,25 +655,31 @@
       z-index: 1;
     }
     footer p {
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--muted);
       letter-spacing: 0.04em;
     }
-    footer a { color: var(--gold); text-decoration: none; }
+    footer a { color: var(--gold); text-decoration: none; font-weight: 500; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 1.5rem; }
+    /* ── RESPONSIVE RESPONSIVE RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.2rem 2rem; }
+      section { padding: 6rem 2rem; }
+      #hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; gap: 4rem; }
+      #philosophy { grid-template-columns: 1fr; gap: 4rem; }
+      #contact { grid-template-columns: 1fr; gap: 4rem; }
+      #why { grid-template-columns: 1fr; gap: 2rem; }
+      footer { padding: 2.5rem 2rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
       .nav-links { display: none; }
-      section { padding: 5rem 1.5rem; }
-      #hero { padding: 9rem 1.5rem 5rem; }
-      #philosophy { grid-template-columns: 1fr; gap: 3rem; }
-      #contact { grid-template-columns: 1fr; gap: 3rem; }
-      #why { grid-template-columns: 1fr; gap: 1.5rem; }
       .form-row { grid-template-columns: 1fr; }
-      .hero-badge { display: none; }
-      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
-      .divider { margin: 0 1.5rem; width: calc(100% - 3rem); }
+      .topology-diagram { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+      .topo-tunnel { display: none; }
+      .topo-badge-center { position: relative; left: 0; top: 0; transform: none; display: inline-block; width: max-content; margin: 0 auto; }
+      .isp-cloud { margin: 0 auto; }
+      .topo-features { grid-template-columns: 1fr; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -567,9 +689,6 @@
 </head>
 <body>
 
-<canvas id="grid-canvas"></canvas>
-
-<!-- NAV -->
 <nav>
   <a href="#" class="logo">Nuthan<span>Tech</span></a>
   <ul class="nav-links">
@@ -583,78 +702,155 @@
 
 <main>
 
-  <!-- HERO -->
   <section id="hero">
-    <p class="hero-eyebrow">IT Infrastructure · Hyderabad, India</p>
-    <h1 class="hero-headline">
-      Built right,<br/><em>not rushed.</em>
-    </h1>
-    <p class="hero-sub">
-      We design and deploy on-prem infrastructure, SaaS solutions, and end-to-end IT architecture for startups and SMBs — taking the time to genuinely understand your business before writing a single line of config.
-    </p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start a Conversation</a>
-      <a href="#services" class="btn-ghost">Our Services</a>
+    <div class="hero-content">
+      <p class="hero-eyebrow">IT Infrastructure · Hyderabad, India</p>
+      <h1 class="hero-headline">
+        Built right,<br/><em>not rushed.</em>
+      </h1>
+      <p class="hero-sub">
+        We design and deploy on-prem infrastructure, SaaS solutions, and end-to-end IT architecture for startups and SMBs — taking the time to genuinely understand your business before writing a single line of config.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start a Conversation</a>
+        <a href="#services" class="btn-ghost">Our Services</a>
+      </div>
     </div>
-    <div class="hero-badge">
-      <span>Trusted by</span>
-      <strong>Startups &amp; SMBs</strong>
-      <span>across sectors</span>
+
+    <div class="topology-container">
+      <div class="topology-diagram">
+        <div class="topo-tunnel"></div>
+        <div class="topo-badge-center">Secure Tunnel (VPN / IPSEC)</div>
+        
+        <div class="topo-col">
+          <h4>Your Users</h4>
+          <div class="topo-list">
+            <div class="topo-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              Desktop
+            </div>
+            <div class="topo-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              Mobile
+            </div>
+          </div>
+        </div>
+
+        <div class="topo-col">
+          <h4>Network Edge</h4>
+          <div class="topo-list">
+            <div class="topo-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 20 20 24 16"></polyline><polyline points="14 14 10 10 6 14"></polyline><path d="M20 20V14a4 4 0 0 0-4-4H4"></path></svg>
+              Router / ONT
+            </div>
+            <div class="topo-item" style="border-color: var(--gold-dim);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              Firewall
+            </div>
+          </div>
+        </div>
+
+        <div class="topo-col">
+          <h4>Infrastructure</h4>
+          <div class="topo-list">
+            <div class="topo-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+              Servers
+            </div>
+            <div class="topo-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+              Storage
+            </div>
+          </div>
+        </div>
+
+        <div class="isp-cloud">
+          ISP
+          <span>Internet</span>
+        </div>
+      </div>
+
+      <div class="topo-features">
+        <div class="topo-f-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <div>
+            <h5>Secure By Design</h5>
+            <p>Firewalls, isolated VPN infrastructures, and encryption layers deployed natively.</p>
+          </div>
+        </div>
+        <div class="topo-f-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <div>
+            <h5>High Availability</h5>
+            <p>Smart auto-failover, component clustering, and zero single-point-of-failure routing.</p>
+          </div>
+        </div>
+        <div class="topo-f-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 7 13.5 15.5 8.5 10.5 2 17"></polygon><polyline points="16 7 22 7 22 13"></polyline></svg>
+          <div>
+            <h5>Scalable Blueprints</h5>
+            <p>Modular planning allows components to scale upwards gracefully alongside operations.</p>
+          </div>
+        </div>
+        <div class="topo-f-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <div>
+            <h5>Proactive Support</h5>
+            <p>Continuous monitoring matrix alerts to infrastructure anomalies before downtime spikes.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services">
     <p class="section-label">What We Do</p>
     <h2 class="section-title">End-to-end IT,<br/>your way.</h2>
-    <p class="section-sub">From bare metal to the browser — we own the full stack so you don't have to patch together vendors.</p>
+    <p class="section-sub">From bare metal to the browser — we own the full stack so you don't have to patch together multiple external parties.</p>
 
     <div class="services-grid">
-
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
         <h3>Server & On-Prem Infrastructure</h3>
-        <p>Rack design, provisioning, and management. Proxmox virtualisation, storage clustering, and backup strategies tailored to your scale — not the enterprise next door.</p>
+        <p>Rack system architecture, modern hypervisors, Proxmox virtualization, cluster mirroring, and automated backup matrices crafted directly for SMB constraints.</p>
       </div>
 
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
         <h3>Switching & Network Solutions</h3>
-        <p>VLAN segmentation, managed switches, structured cabling, and Wi-Fi deployments. Solid foundations that grow without redesign.</p>
+        <p>Logical VLAN profiling, physical cross-connections, industrial Wi-Fi grids, and structured network plants built with hardware scaling headroom.</p>
       </div>
 
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <h3>Network Security & pfSense</h3>
-        <p>Firewall rule architecture, VPN tunnels, IDS/IPS, and traffic shaping using pfSense. Security that's layered, not bolted on.</p>
+        <h3>Network Security & Firewall</h3>
+        <p>Stateful inspection matrices, dedicated threat prevention, isolated hardware zones, and secure encrypted tunnels to preserve system operational integrity.</p>
       </div>
 
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         <h3>SaaS & CRM Deployment</h3>
-        <p>ERPNext implementation, configuration, and training. A modern ERP that fits your workflow — not the other way around.</p>
+        <p>Tailored configurations for platforms like ERPNext. Seamless setup and staff workspace initialization to translate workflows naturally into systems.</p>
       </div>
 
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <h3>Endpoint & Solution Architecture</h3>
-        <p>Unified endpoint management, device policies, and solution blueprints drawn to match your operations — before any hardware ships.</p>
+        <p>Centralized policy matrices, cross-platform enrollment protocols, hardware configuration mappings, and custom operational deployment maps.</p>
       </div>
 
       <div class="service-card">
         <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         <h3>Email Security</h3>
-        <p>SPF, DKIM, DMARC hardening, spam filtering, and mail server configuration. Deliverability you can trust; threats you won't see.</p>
+        <p>Ironclad DMARC, DKIM, and SPF cryptographic alignment protocols. Superior inbound protection and outbound message validation frameworks.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- PHILOSOPHY -->
-  <section id="philosophy" style="background: var(--bg);">
+  <section id="philosophy">
     <div class="philosophy-visual">
       <p class="section-label">Our Approach</p>
-      <h2 class="section-title" style="margin-bottom: 3rem;">How every project runs</h2>
+      <h2 class="section-title" style="margin-bottom: 2rem;">How every project runs</h2>
       <div class="timeline-steps">
         <div class="timeline-step">
           <span class="step-num">01</span>
@@ -695,7 +891,6 @@
     </div>
   </section>
 
-  <!-- STACK -->
   <section id="stack">
     <p class="section-label">Technology Stack</p>
     <h2 class="section-title">Tools we live in.</h2>
@@ -703,7 +898,7 @@
     <div class="tools-row">
       <span class="tool-chip">Proxmox VE</span>
       <span class="tool-chip">ERPNext</span>
-      <span class="tool-chip">pfSense / OPNsense</span>
+      <span class="tool-chip">Firewall Engine / OPNsense</span>
       <span class="tool-chip">Linux (Debian / Ubuntu)</span>
       <span class="tool-chip">Harvester HCI</span>
       <span class="tool-chip">Rancher</span>
@@ -721,8 +916,7 @@
     </div>
   </section>
 
-  <!-- WHY US -->
-  <section id="why" style="background: var(--bg);">
+  <section id="why">
     <div class="why-item">
       <div class="why-num">SMB<br/>First</div>
       <h4>Not an afterthought</h4>
@@ -740,7 +934,6 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="contact-info">
       <p class="section-label">Get in Touch</p>
@@ -748,21 +941,21 @@
       <p>Tell us where you are and where you want to be. We'll take it from there — no pressure, no boilerplate proposal, just a genuine conversation.</p>
       <div class="contact-detail">
         <a href="mailto:srikanth.javvadi@nuthantech.in">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           srikanth.javvadi@nuthantech.in
         </a>
-        <a href="https://nuthatech.in">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <a href="https://nuthantech.in" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           nuthantech.in · Hyderabad, India
         </a>
       </div>
     </div>
 
-    <!-- <form class="contact-form" id="contactForm" novalidate>
+    <form class="contact-form" id="contactForm">
       <div class="form-row">
         <div class="field">
           <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Name :)" required />
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
         </div>
         <div class="field">
           <label for="email">Email Address</label>
@@ -779,7 +972,7 @@
           <option value="" disabled selected>Select a service area</option>
           <option>Server & On-Prem Infrastructure</option>
           <option>Switching & Networking</option>
-          <option>Network Security / pfSense</option>
+          <option>Network Security / Firewall</option>
           <option>SaaS / CRM (ERPNext)</option>
           <option>Endpoint & Solution Architecture</option>
           <option>Email Security</option>
@@ -788,106 +981,31 @@
       </div>
       <div class="field">
         <label for="message">Tell us about your project</label>
-        <textarea id="message" name="message" placeholder="Brief overview — scale, current pain points, timelines you're thinking about..."></textarea>
+        <textarea id="message" name="message" placeholder="Brief overview — scale, current pain points, timelines..."></textarea>
       </div>
       <div class="form-submit">
         <button type="submit" class="btn-primary" id="submitBtn">Send Message</button>
         <span id="form-status"></span>
       </div>
-    </form> -->
+    </form>
   </section>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2025 <a href="#">NuthanTech</a> — nuthantech.in · Hyderabad, India</p>
+  <p>© 2026 <a href="#">NuthanTech</a> — nuthantech.in · Hyderabad, India</p>
   <p style="font-size:0.72rem; color:#3A4560;">IT Infrastructure · Network Security · SaaS Solutions</p>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
-  // ── Animated grid / topology canvas background ──
-  (function() {
-    const canvas = document.getElementById('grid-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, points = [], animId;
-    const NUM = 55, GOLD = '#C8A456', LINK_DIST = 160;
-
-    function resize() {
-      W = canvas.width  = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-
-    function initPoints() {
-      points = [];
-      for (let i = 0; i < NUM; i++) {
-        points.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: (Math.random() - 0.5) * 0.25,
-        });
-      }
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      // move
-      points.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
-      });
-      // links
-      for (let i = 0; i < points.length; i++) {
-        for (let j = i + 1; j < points.length; j++) {
-          const dx = points[i].x - points[j].x;
-          const dy = points[i].y - points[j].y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < LINK_DIST) {
-            const alpha = 1 - dist / LINK_DIST;
-            ctx.beginPath();
-            ctx.strokeStyle = GOLD;
-            ctx.globalAlpha = alpha * 0.35;
-            ctx.lineWidth = 0.6;
-            ctx.moveTo(points[i].x, points[i].y);
-            ctx.lineTo(points[j].x, points[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-      // dots
-      ctx.globalAlpha = 0.55;
-      points.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = GOLD;
-        ctx.fill();
-      });
-      ctx.globalAlpha = 1;
-      animId = requestAnimationFrame(draw);
-    }
-
-    window.addEventListener('resize', () => { resize(); initPoints(); });
-    resize(); initPoints(); draw();
-  })();
-
-  // ── EmailJS contact form ──
-  // ⚠️  SETUP REQUIRED:
-  //   1. Create a free account at https://emailjs.com
-  //   2. Add an Email Service (Gmail / SMTP) — copy the Service ID
-  //   3. Create an Email Template — copy the Template ID
-  //      Template variables: {{name}}, {{email}}, {{company}}, {{interest}}, {{message}}
-  //      "To email" in template → srikanth.javvadi@nuthantech.in
-  //   4. Copy your Public Key from Account → API Keys
-  //   5. Replace the three placeholder strings below.
-
+  // EmailJS logic setup
   const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
   const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
   const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
 
-  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  if(EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
 
   const form     = document.getElementById('contactForm');
   const status   = document.getElementById('form-status');
@@ -910,6 +1028,18 @@
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
+
+    // Verify configurations are set
+    if(EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+      // Fallback response style for instant mock feedback
+      setTimeout(() => {
+        status.textContent = 'Setup alert: Configure your EmailJS keys in the script block!';
+        status.className = 'visible';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message';
+      }, 1000);
+      return;
+    }
 
     try {
       await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
@@ -935,3 +1065,5 @@
 
 </body>
 </html>
+
+```
