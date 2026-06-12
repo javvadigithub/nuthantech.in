@@ -1,231 +1,937 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NuthanTech Solutions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NuthaTech — IT Infrastructure & Solutions</title>
+  <meta name="description" content="Thoughtful IT infrastructure for startups and SMBs. Server, switching, on-prem, SaaS, CRM — built right, not rushed." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg:        #080D1A;
+      --bg2:       #0E1525;
+      --card:      #111C30;
+      --border:    #1A2640;
+      --gold:      #C8A456;
+      --gold-dim:  #8A6E36;
+      --white:     #EDE9E3;
+      --muted:     #7A8499;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── CANVAS BACKGROUND ── */
+    #grid-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: rgba(8,13,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid var(--gold-dim);
+      padding: 0.5rem 1.2rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── SECTIONS WRAPPER ── */
+    main { position: relative; z-index: 1; }
+
+    section { padding: 7rem 4rem; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10rem 4rem 6rem;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      max-width: 14ch;
+      margin-bottom: 2rem;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 50ch;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 0.85rem 2rem;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--white); }
+
+    .hero-badge {
+      position: absolute;
+      right: 4rem;
+      bottom: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.4rem;
+    }
+    .hero-badge span {
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-badge strong {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: -0.03em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0 4rem;
+      width: calc(100% - 8rem);
+    }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg2); }
+
+    .section-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 4rem;
+      line-height: 1.8;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .service-card {
+      background: var(--card);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s;
+    }
+    .service-card:hover { background: #162035; }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.3s ease;
+    }
+    .service-card:hover::after { height: 100%; }
+
+    .service-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--gold);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── PHILOSOPHY ── */
+    #philosophy {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .philosophy-visual {
+      position: relative;
+    }
+
+    .timeline-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .timeline-step:last-child { border-bottom: none; }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      min-width: 2.5rem;
+      padding-top: 0.2rem;
+    }
+
+    .step-body h4 {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .philosophy-quote {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+    .philosophy-quote strong {
+      font-weight: 700;
+      color: var(--gold);
+    }
+    .philosophy-quote cite {
+      display: block;
+      margin-top: 1.5rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-style: normal;
+    }
+
+    /* ── TOOLS / STACK ── */
+    #stack { background: var(--bg2); }
+
+    .tools-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 3rem;
+    }
+
+    .tool-chip {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.5rem 1.1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tool-chip:hover { border-color: var(--gold-dim); color: var(--white); }
+
+    /* ── WHY US ── */
+    #why {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 3rem;
+    }
+    .why-item {
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .why-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .why-item h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .why-item p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg2);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .contact-info h2 { margin-bottom: 1rem; }
+    .contact-info p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contact-detail a {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: color 0.2s;
+    }
+    .contact-detail a:hover { color: var(--gold); }
+
+    /* ── FORM ── */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .field label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      padding: 0.8rem 1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    .field input::placeholder,
+    .field textarea::placeholder { color: #3A4560; }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus { border-color: var(--gold-dim); }
+    .field select { cursor: pointer; }
+    .field textarea { resize: vertical; min-height: 130px; }
+
+    .form-submit {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    #form-status {
+      font-size: 0.82rem;
+      color: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    #form-status.visible { opacity: 1; }
+    #form-status.error { color: #e06060; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 1;
+    }
+    footer p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      #hero { padding: 9rem 1.5rem 5rem; }
+      #philosophy { grid-template-columns: 1fr; gap: 3rem; }
+      #contact { grid-template-columns: 1fr; gap: 3rem; }
+      #why { grid-template-columns: 1fr; gap: 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .hero-badge { display: none; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .divider { margin: 0 1.5rem; width: calc(100% - 3rem); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
 </head>
 <body>
 
-<header>
-    <div class="container nav">
-        <div class="logo">NUTHANTECH</div>
+<canvas id="grid-canvas"></canvas>
 
-        <nav>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#tech">Technologies</a>
-            <a href="#process">Process</a>
-            <a href="#contact">Contact</a>
-        </nav>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Nuthan<span>Tech</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#philosophy">Approach</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow">IT Infrastructure · Hyderabad, India</p>
+    <h1 class="hero-headline">
+      Built right,<br/><em>not rushed.</em>
+    </h1>
+    <p class="hero-sub">
+      We design and deploy on-prem infrastructure, SaaS solutions, and end-to-end IT architecture for startups and SMBs — taking the time to genuinely understand your business before writing a single line of config.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
     </div>
-</header>
+    <div class="hero-badge">
+      <span>Trusted by</span>
+      <strong>Startups &amp; SMBs</strong>
+      <span>across sectors</span>
+    </div>
+  </section>
 
-<section class="hero">
+  <!-- SERVICES -->
+  <section id="services">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">End-to-end IT,<br/>your way.</h2>
+    <p class="section-sub">From bare metal to the browser — we own the full stack so you don't have to patch together vendors.</p>
 
-    <div class="hero-content">
+    <div class="services-grid">
 
-        <h1>
-            Building Reliable Technology Foundations
-            for Growing Businesses
-        </h1>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+        <h3>Server & On-Prem Infrastructure</h3>
+        <p>Rack design, provisioning, and management. Proxmox virtualisation, storage clustering, and backup strategies tailored to your scale — not the enterprise next door.</p>
+      </div>
 
-        <p>
-            Infrastructure, Security, ERP and Managed IT
-            Solutions designed with real-world experience.
-        </p>
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <h3>Switching & Network Solutions</h3>
+        <p>VLAN segmentation, managed switches, structured cabling, and Wi-Fi deployments. Solid foundations that grow without redesign.</p>
+      </div>
 
-        <a href="#contact" class="btn">
-            Request Consultation
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <h3>Network Security & pfSense</h3>
+        <p>Firewall rule architecture, VPN tunnels, IDS/IPS, and traffic shaping using pfSense. Security that's layered, not bolted on.</p>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <h3>SaaS & CRM Deployment</h3>
+        <p>ERPNext implementation, configuration, and training. A modern ERP that fits your workflow — not the other way around.</p>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <h3>Endpoint & Solution Architecture</h3>
+        <p>Unified endpoint management, device policies, and solution blueprints drawn to match your operations — before any hardware ships.</p>
+      </div>
+
+      <div class="service-card">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <h3>Email Security</h3>
+        <p>SPF, DKIM, DMARC hardening, spam filtering, and mail server configuration. Deliverability you can trust; threats you won't see.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy" style="background: var(--bg);">
+    <div class="philosophy-visual">
+      <p class="section-label">Our Approach</p>
+      <h2 class="section-title" style="margin-bottom: 3rem;">How every project runs</h2>
+      <div class="timeline-steps">
+        <div class="timeline-step">
+          <span class="step-num">01</span>
+          <div class="step-body">
+            <h4>Deep Discovery</h4>
+            <p>We spend real time learning your business — workflows, pain points, growth plans — before suggesting anything technical.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">02</span>
+          <div class="step-body">
+            <h4>Solution Architecture</h4>
+            <p>A written blueprint you own, reviewed together, revised until it fits. No surprises once deployment starts.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">03</span>
+          <div class="step-body">
+            <h4>Stipulated Timeline</h4>
+            <p>We agree on a realistic schedule upfront. Rushed deployments create technical debt. Ours don't.</p>
+          </div>
+        </div>
+        <div class="timeline-step">
+          <span class="step-num">04</span>
+          <div class="step-body">
+            <h4>Handover & Support</h4>
+            <p>Documentation, team training, and post-deployment monitoring. We stay until it's truly running smoothly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <blockquote class="philosophy-quote">
+        "We take a good amount of time to <strong>understand the problem</strong> before we build the solution — because the cost of getting it wrong is always higher than the cost of getting it right."
+        <cite>— NuthanTech</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section id="stack">
+    <p class="section-label">Technology Stack</p>
+    <h2 class="section-title">Tools we live in.</h2>
+    <p class="section-sub">Proven open-source and enterprise tooling, chosen for longevity and vendor independence — not licensing lock-in.</p>
+    <div class="tools-row">
+      <span class="tool-chip">Proxmox VE</span>
+      <span class="tool-chip">ERPNext</span>
+      <span class="tool-chip">pfSense / OPNsense</span>
+      <span class="tool-chip">Linux (Debian / Ubuntu)</span>
+      <span class="tool-chip">Harvester HCI</span>
+      <span class="tool-chip">Rancher</span>
+      <span class="tool-chip">VMware</span>
+      <span class="tool-chip">Nginx / HAProxy</span>
+      <span class="tool-chip">WireGuard / OpenVPN</span>
+      <span class="tool-chip">Nextcloud</span>
+      <span class="tool-chip">Zabbix / Grafana</span>
+      <span class="tool-chip">Docker / Compose</span>
+      <span class="tool-chip">Ansible</span>
+      <span class="tool-chip">Let's Encrypt / PKI</span>
+      <span class="tool-chip">Mailcow / Postfix</span>
+      <span class="tool-chip">DMARC / DKIM / SPF</span>
+      <span class="tool-chip">Netdata</span>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section id="why" style="background: var(--bg);">
+    <div class="why-item">
+      <div class="why-num">SMB<br/>First</div>
+      <h4>Not an afterthought</h4>
+      <p>Our entire model is calibrated for startups and small-medium businesses — lean budgets, fast-changing needs, real constraints respected.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">No<br/>Rush</div>
+      <h4>Stipulated timelines only</h4>
+      <p>We set and honour a realistic deployment schedule. Every project has a written architecture plan before a single cable is run.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">Full<br/>Stack</div>
+      <h4>One partner, full coverage</h4>
+      <p>Network to application layer — you work with one team that understands the whole picture, not a chain of specialists pointing fingers.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-info">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's talk about your infrastructure.</h2>
+      <p>Tell us where you are and where you want to be. We'll take it from there — no pressure, no boilerplate proposal, just a genuine conversation.</p>
+      <div class="contact-detail">
+        <a href="mailto:srikanth.javvadi@nuthantech.in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          srikanth.javvadi@nuthantech.in
         </a>
-
+        <a href="https://nuthatech.in">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          nuthatech.in · Hyderabad, India
+        </a>
+      </div>
     </div>
 
-</section>
-
-<section id="about">
-
-    <div class="container">
-
-        <h2>About NuthanTech</h2>
-
-        <p>
-            NuthanTech Solutions is a startup founded by experienced
-            technology professionals with hands-on expertise in
-            infrastructure operations, Active Directory,
-            virtualization, networking, cybersecurity and ERP solutions.
-        </p>
-
-        <p>
-            We believe every successful project starts with understanding
-            the customer before recommending technology.
-        </p>
-
-    </div>
-
-</section>
-
-<section id="services">
-
-    <div class="container">
-
-        <h2>Our Services</h2>
-
-        <div class="cards">
-
-            <div class="card">
-                <i class="fa-solid fa-server"></i>
-                <h3>Server Management</h3>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-network-wired"></i>
-                <h3>Network Infrastructure</h3>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h3>Security Solutions</h3>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-cloud"></i>
-                <h3>Virtualization</h3>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-database"></i>
-                <h3>Storage & Backup</h3>
-            </div>
-
-            <div class="card">
-                <i class="fa-solid fa-building"></i>
-                <h3>ERPNext Solutions</h3>
-            </div>
-
+    <form class="contact-form" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name :)" required />
         </div>
-
-    </div>
-
-</section>
-
-<section id="tech">
-
-    <div class="container">
-
-        <h2>Technologies We Work With</h2>
-
-        <div class="tech-grid">
-
-            <span>ERPNext</span>
-            <span>Proxmox</span>
-            <span>Harvester</span>
-            <span>VMware</span>
-            <span>Cisco</span>
-            <span>MikroTik</span>
-            <span>pfSense</span>
-            <span>Linux</span>
-            <span>Docker</span>
-            <span>Windows Server</span>
-
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="you@company.com" required />
         </div>
+      </div>
+      <div class="field">
+        <label for="company">Company / Organisation</label>
+        <input type="text" id="company" name="company" placeholder="Your Startup or SMB" />
+      </div>
+      <div class="field">
+        <label for="interest">Area of Interest</label>
+        <select id="interest" name="interest">
+          <option value="" disabled selected>Select a service area</option>
+          <option>Server & On-Prem Infrastructure</option>
+          <option>Switching & Networking</option>
+          <option>Network Security / pfSense</option>
+          <option>SaaS / CRM (ERPNext)</option>
+          <option>Endpoint & Solution Architecture</option>
+          <option>Email Security</option>
+          <option>Multiple / Full Stack</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Tell us about your project</label>
+        <textarea id="message" name="message" placeholder="Brief overview — scale, current pain points, timelines you're thinking about..."></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-primary" id="submitBtn">Send Message</button>
+        <span id="form-status"></span>
+      </div>
+    </form>
+  </section>
 
-    </div>
+</main>
 
-</section>
-
-<section id="process">
-
-    <div class="container">
-
-        <h2>Our Delivery Process</h2>
-
-        <div class="steps">
-
-            <div>1. Discovery</div>
-            <div>2. Assessment</div>
-            <div>3. Design</div>
-            <div>4. Implementation</div>
-            <div>5. Testing</div>
-            <div>6. Support</div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<section id="contact">
-
-    <div class="container">
-
-        <h2>Contact Us</h2>
-
-        <form id="contactForm">
-
-            <input
-                type="text"
-                placeholder="Full Name"
-                required>
-
-            <input
-                type="email"
-                placeholder="Email Address"
-                required>
-
-            <input
-                type="text"
-                placeholder="Company Name">
-
-            <textarea
-                rows="5"
-                placeholder="Tell us about your requirement"
-                required></textarea>
-
-            <button type="submit">
-                Submit Inquiry
-            </button>
-
-        </form>
-
-        <p id="msg"></p>
-
-    </div>
-
-</section>
-
+<!-- FOOTER -->
 <footer>
-
-    <div class="container">
-
-        <h3>NuthanTech Solutions</h3>
-
-        <p>
-            Transforming Business Through Reliable Technology Solutions.
-        </p>
-
-        <p>
-            Hyderabad, Telangana, India
-        </p>
-
-    </div>
-
+  <p>© 2025 <a href="#">NuthaTech</a> — nuthatech.in · Hyderabad, India</p>
+  <p style="font-size:0.72rem; color:#3A4560;">IT Infrastructure · Network Security · SaaS Solutions</p>
 </footer>
 
-<a class="whatsapp"
-href="https://wa.me/919999999999"
-target="_blank">
+<!-- SCRIPTS -->
+<script>
+  // ── Animated grid / topology canvas background ──
+  (function() {
+    const canvas = document.getElementById('grid-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, points = [], animId;
+    const NUM = 55, GOLD = '#C8A456', LINK_DIST = 160;
 
-<i class="fab fa-whatsapp"></i>
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
 
-</a>
+    function initPoints() {
+      points = [];
+      for (let i = 0; i < NUM; i++) {
+        points.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+        });
+      }
+    }
 
-<script src="script.js"></script>
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      // move
+      points.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+      });
+      // links
+      for (let i = 0; i < points.length; i++) {
+        for (let j = i + 1; j < points.length; j++) {
+          const dx = points[i].x - points[j].x;
+          const dy = points[i].y - points[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < LINK_DIST) {
+            const alpha = 1 - dist / LINK_DIST;
+            ctx.beginPath();
+            ctx.strokeStyle = GOLD;
+            ctx.globalAlpha = alpha * 0.35;
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(points[i].x, points[i].y);
+            ctx.lineTo(points[j].x, points[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      // dots
+      ctx.globalAlpha = 0.55;
+      points.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = GOLD;
+        ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      animId = requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => { resize(); initPoints(); });
+    resize(); initPoints(); draw();
+  })();
+
+  // ── EmailJS contact form ──
+  // ⚠️  SETUP REQUIRED:
+  //   1. Create a free account at https://emailjs.com
+  //   2. Add an Email Service (Gmail / SMTP) — copy the Service ID
+  //   3. Create an Email Template — copy the Template ID
+  //      Template variables: {{name}}, {{email}}, {{company}}, {{interest}}, {{message}}
+  //      "To email" in template → srikanth.javvadi@nuthantech.in
+  //   4. Copy your Public Key from Account → API Keys
+  //   5. Replace the three placeholder strings below.
+
+  const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+  const form     = document.getElementById('contactForm');
+  const status   = document.getElementById('form-status');
+  const submitBtn = document.getElementById('submitBtn');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    status.textContent = '';
+    status.className = '';
+
+    const name    = form.name.value.trim();
+    const email   = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      status.textContent = 'Please fill in name, email, and message.';
+      status.className = 'visible error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name:     name,
+        email:    email,
+        company:  form.company.value.trim() || '—',
+        interest: form.interest.value || 'Not specified',
+        message:  message,
+      });
+      status.textContent = 'Message sent! We\'ll be in touch soon.';
+      status.className = 'visible';
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      status.textContent = 'Send failed — please email us directly.';
+      status.className = 'visible error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+    }
+  });
+</script>
 
 </body>
 </html>
